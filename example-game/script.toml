@@ -1,0 +1,209 @@
+# Information of the game
+# 1. name (necessary) : name of the game
+# 2. cover (necessary) : cover image of the game
+# 3. version (optional) : version of the game
+# 4. author (optional) : author of the game
+# 5. description (optional) : description of the game
+[information]
+
+# name: string
+name = "Example Game"
+# cover: string
+cover = "/assets/cover.png"
+# version: string
+version = "1.0.0"
+# author: string
+author = "Lebron James"
+# description: string
+description = "This is an example game"
+
+
+# Information of the player
+# 1. name (necessary) : name of the player
+# 2. inventory (necessary) : initial inventory of the player
+[player]
+
+# name: string
+name = "Will Smith"
+# inventory: array [ item , ...]
+inventory = [ "gift", "cake", "candy"]
+
+# All items in the game
+
+# Information of one item
+# 1. name (necessary) : name of the item
+# 2. description (optional) : description of the item
+# 3. value (necessary) : value of increasing favor of the item
+# 4. image (necessary) : image of the item
+[[item]]
+
+# name: string
+name = "gift"
+# description: string
+description = "This is a gift"
+# value: integer
+value = 20
+# image: string
+image = "/assets/images/item/gift.bmp"
+
+[[item]]
+name = "cake"
+description = "This is a cake"
+value = 5
+image = "/assets/images/item/cake.bmp"
+
+[[item]]
+name = "cookies"
+description = "This is a cookies"
+value = 10
+image = "/assets/images/item/cookies.bmp"
+
+# Characters of the game
+[[character]]
+
+# Information of one character
+# 1. name (necessary) : name of the character
+# 2. favor (necessary) : initial favor of the character
+# 3. avatar (necessary) : avatar of the character
+
+# name: string
+name = "Amy"
+# favor: integer
+favor = 50
+# avatar: array [ [ lower bound, upper bound, avatar image ] , ...]
+avatar = [[ 0, 49, "/assets/images/character/amy_1.bmp"], [50, 100, "/assets/images/character/amy_2.bmp"]]
+
+[[character]]
+name = "Britney"
+favor = 50
+avatar = [[ 0, 49, "/assets/images/character/britney_1.bmp"], [50, 100, "/assets/images/character/britney_2.bmp"]]
+
+[[character]]
+name = "Claire"
+favor = 50
+avatar = [[0, 49, "/assets/images/character/claire_1.bmp"], [50, 100, "/assets/images/character/claire_2.bmp"]]
+
+
+# scenario of the game
+[scenario]
+
+    # branch of the chapter
+    [[scenario.branch]]
+
+        # dialogue of the scenario ( starts from 0 )
+        # 1. scene_image (necessary) : image of the scene
+        # 2. character (necessary) : character which the dialogue starts with
+        # 3. type (necessary) : type of the dialogue
+        #   3a. text : normal coversation text
+        #   3b. option_by_favor : options for player to choose, select next branch by favor 
+        #   3c. option_by_choice : options for player to choose, select next branch by choosen option
+        # 4. text (necessary) : text of the dialogue
+        [[scenario.branch.dialogue]]
+        scene_image = "classroom.bmp" 
+        character = "player"
+        type = "text"
+        text = "今天真是平凡的一天～1"
+
+        [[scenario.branch.dialogue]]
+        scene_image = "classroom.bmp" 
+        character = "player"
+        type = "text"
+        text = "今天真是平凡的一天～2"
+
+        [[scenario.branch.dialogue]]
+        scene_image = "classroom.bmp" 
+        character = "player"
+        type = "text"
+        text = "今天真是平凡的一天～3"
+
+        [[scenario.branch.dialogue]]
+        scene_image = "classroom.bmp" 
+        character = "player"
+        type = "text"
+        text = "今天真是平凡的一天～4"
+
+        [[scenario.branch.dialogue]]
+        scene_image = "classroom.bmp" 
+        character = "Amy"
+        type = "text"
+        text = "對啊對啊！1"
+
+        [[scenario.branch.dialogue]]
+        scene_image = "classroom.bmp" 
+        character = "Amy"
+        type = "text"
+        text = "對啊對啊！2"   
+
+        [[scenario.branch.dialogue]]
+        scene_image = "classroom.bmp" 
+        character = "player"
+        # type : option_by_favor option_by_choice
+        type = "option_by_choice"
+        
+            [[scenario.branch.dialogue.option]]
+            text = "哇！你是從哪裡冒出來的啊！"
+            next_branch = 1
+
+            [[scenario.branch.dialogue.option]]
+            text = "我只是在自言自語不用回答啦！"
+            next_branch = 2
+
+    [[scenario.branch]]
+        
+        [[scenario.branch.dialogue]]
+        scene_image = "classroom.bmp" 
+        character = "Amy"
+        type = "text"
+        text = "從一開始就在啦"
+
+        [[scenario.branch.dialogue]]
+        scene_image = "classroom.bmp" 
+        character = "player"
+        type = "option_by_favor"
+        next_branch = [ [0, 50, 2], [51, 100, 3] ]      
+
+            [[scenario.branch.dialogue.option]]
+            text = "我怎麼沒有發現"
+            object = "Amy"
+            value = -5
+
+            [[scenario.branch.dialogue.option]]
+            text = "那你早點說嘛"
+            object = "Amy"
+            value = 5
+
+    [[scenario.branch]]
+
+        [[scenario.branch.dialogue]]
+        scene_image = "classroom.bmp" 
+        character = "Amy"
+        type = "text"
+        text = "我以為你是在跟我講話啊"
+
+    [[scenario.branch]]
+
+        [[scenario.branch.dialogue]]
+        scene_image = "classroom.bmp" 
+        character = "Amy"
+        type = "text"
+        text = "你都沒有在注意人家..."
+
+    [[scenario.branch]]
+
+        [[scenario.branch.dialogue]]
+        scene_image = "classroom.bmp" 
+        character = "Amy"
+        type = "text"
+        text = "我以為你是在跟我講話啊1"
+
+        [[scenario.branch.dialogue]]
+        scene_image = "classroom.bmp" 
+        character = "Amy"
+        type = "text"
+        text = "我以為你是在跟我講話啊2"
+
+        [[scenario.branch.dialogue]]
+        scene_image = "classroom.bmp" 
+        character = "Amy"
+        type = "text"
+        text = "我以為你是在跟我講話啊3"
