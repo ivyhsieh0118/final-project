@@ -1,0 +1,4 @@
+*.o
+engine
+src/*.o
+src/.DS_Store
