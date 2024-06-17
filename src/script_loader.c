@@ -2,6 +2,11 @@
 
 extern char *dir;
 
+toml_table_t *table;
+toml_table_t *tInfo, *tPlayer, *tChar, *tScenario;
+toml_table_t *nowtBrc, *nowtDlg, *nowtItm;
+toml_array_t *aBrc, *aDlg, *aChar, *aAvts, *aAvt, *aNxtBrcs, *aNxtBrc, *aInv, *aItm;
+
 gameStatus init_script_loader() {
     LOG_INFO("Initializing script loader");
     char path[1024];
@@ -22,13 +27,99 @@ gameStatus init_script_loader() {
     return GAME_INITIALIZING;
 }
 
+gameStatus load_information(char *img) {
+    LOG_INFO("Loading information");
+    tInfo = toml_table_in(table, "information");
+    if (!tInfo) {
+        LOG_ERROR("Could not find information table");
+        return GAME_ERROR;
+    }
+    toml_datum_t cover = toml_string_in(tInfo, "cover");
+    if (!cover.ok) {
+        LOG_ERROR("Could not find information cover");
+        return GAME_ERROR;
+    }
+    strcpy(img, cover.u.s);
+    LOG_INFO("Information loaded");
+    return GAME_INITIALIZING;
+}
+
+gameStatus load_item() {
+    extern player plr;
+    aItm = toml_array_in(table, "item");
+    if (!aItm) {
+        LOG_ERROR("Could not find item table");
+        return GAME_ERROR;
+    }
+    for (int i = 0; i < toml_array_nelem(aItm); i++) {
+        nowtItm = toml_table_at(aItm, i);
+        if (!nowtItm) {
+            LOG_ERROR("Could not find item table %d", i);
+            return GAME_ERROR;
+        }
+        toml_datum_t name = toml_string_in(nowtItm, "name");
+        if (!name.ok) {
+            LOG_ERROR("Could not find item name %d", i);
+            return GAME_ERROR;
+        }
+        int itmIndex = -1;
+        for (int j = 0; j < plr.nInv; j++) {
+            if (strcmp(plr.inv[j].name, name.u.s) == 0) {
+                itmIndex = j;
+                break;
+            }
+        }
+        toml_datum_t desc = toml_string_in(nowtItm, "description");
+        if (!desc.ok) {
+            LOG_ERROR("Could not find item description %d", i);
+            return GAME_ERROR;
+        }
+        strcpy(plr.inv[itmIndex].desc, desc.u.s);
+        toml_datum_t val = toml_int_in(nowtItm, "value");
+        if (!val.ok) {
+            LOG_ERROR("Could not find item value %d", i);
+            return GAME_ERROR;
+        }
+        plr.inv[itmIndex].val = val.u.i;
+        toml_datum_t img = toml_string_in(nowtItm, "image");
+        if (!img.ok) {
+            LOG_ERROR("Could not find item image %d", i);
+            return GAME_ERROR;
+        }
+        strcpy(plr.inv[itmIndex].img, img.u.s);
+    }
+    return GAME_INITIALIZING;
+}
+
 gameStatus load_player() {
+    extern player plr;
     LOG_INFO("Loading player");
     tPlayer = toml_table_in(table, "player");
     if (!tPlayer) {
         LOG_ERROR("Could not find player table");
         return GAME_ERROR;
     }
+    toml_datum_t name = toml_string_in(tPlayer, "name");
+    if (!name.ok) {
+        LOG_ERROR("Could not find player name");
+        return GAME_ERROR;
+    }
+    strcpy(plr.name, name.u.s);
+    aInv = toml_array_in(tPlayer, "inventory");
+    if (!aInv) {
+        LOG_ERROR("Could not find player inventory array");
+        return GAME_ERROR;
+    }
+    plr.nInv = toml_array_nelem(aInv);
+    for (int i = 0; i < plr.nInv; i++) {
+        toml_datum_t item = toml_string_at(aInv, i);
+        if (!item.ok) {
+            LOG_ERROR("Could not find player inventory item %d", i);
+            return GAME_ERROR;
+        }
+        strcpy(plr.inv[i].name, item.u.s);
+    }
+    load_item();
     LOG_INFO("Player loaded");
     return GAME_INITIALIZING;
 }

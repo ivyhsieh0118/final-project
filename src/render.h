@@ -18,6 +18,11 @@
 #define PLAYING_SCREEN_OPT_NUM 4
 #define DIALOGUE_HEIGHT 8
 #define CHAR_NAME_WIDTH 30
+#define SCENE_HEIGHT 600
+#define SCENE_WIDTH 1400
+
+#define INV_HEIGHT 30
+#define INV_WIDTH 30
 
 /* Error Message */
 // #define ERROR_MESSAGE_OPTION_NUM 1
@@ -45,11 +50,9 @@ gameStatus render_playing_screen(char *img, dialogue dlg);
 
 gameStatus end_playing_screen();
 
-// gameStatus render_game_screen(char *game_dir, char *scene, char *character, char *text);
+gameStatus render_inventory();
 
-// gameStatus render_game_screen_part(char *game_dir, Dialogue *dialogue);
-
-// int render_error_message(char *errorMessage);
+gameStatus end_inventory();
 
 // int end_error_message();
 

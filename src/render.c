@@ -9,6 +9,8 @@ WINDOW *wCharName = NULL;
 WINDOW *wDialogue = NULL;
 WINDOW *wPlayScrOpts[PLAYING_SCREEN_OPT_NUM] = {NULL};
 
+WINDOW *wInvs = NULL;
+
 // initialize curses settings
 gameStatus init_curses()
 {
@@ -72,10 +74,17 @@ gameStatus end_curses()
 gameStatus render_main_menu(char *img)
 {
     LOG_INFO("Starting rendering main menu");
-
-    extern int nowMainMenuOpt;
-    extern char *dir;
     static int isFirst = 1;
+
+    if (isFirst) {
+       char command[300];
+        extern char *dir;
+        sprintf(command, "img2sixel %s/%s", dir, img);
+        LOG_DEBUG("Running command: %s", command);
+        system(command); 
+    }
+    
+    extern int nowMainMenuOpt;
 
     init_pair(1, COLOR_WHITE, COLOR_BLACK);
     init_pair(2, COLOR_BLACK, COLOR_WHITE);
@@ -97,9 +106,9 @@ gameStatus render_main_menu(char *img)
     {
         for (int j = 1; j < wMainMenu_width - 1; j++)
         {
-            wattron(wMainMenu, COLOR_PAIR(1));
-            mvwaddch(wMainMenu, i, j, ' ');
-            wattroff(wMainMenu, COLOR_PAIR(1));
+            wattron(wMainMenu, COLOR_PAIR(3));
+            mvwaddch(wMainMenu, i, j, 'a');
+            wattroff(wMainMenu, COLOR_PAIR(3));
         }
     }
     wrefresh(wMainMenu);
@@ -157,6 +166,7 @@ gameStatus end_main_menu()
     wborder(wMainMenu, ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ');
     wrefresh(wMainMenu);
     delwin(wMainMenu);
+    system("clear");
     LOG_INFO("Main menu is deleted successfully");
     return GAME_MAIN_MENU;
 }
@@ -164,7 +174,14 @@ gameStatus end_main_menu()
 gameStatus render_playing_screen(char *img, dialogue dlg)
 {
     LOG_INFO("Starting rendering playing screen");
-
+    attron(COLOR_PAIR(3));
+    mvaddch(0, 0, 'a');
+    attroff(COLOR_PAIR(3));
+    mvcur(0, 1, 0, 0);
+    char command[300];
+    sprintf(command, "img2sixel -h %d -w %d %s", SCENE_HEIGHT, SCENE_WIDTH, img);
+    LOG_DEBUG("command: %s", command);
+    system(command);
     static int isFirst = 1;
 
     init_pair(1, COLOR_WHITE, COLOR_BLACK);
@@ -188,9 +205,9 @@ gameStatus render_playing_screen(char *img, dialogue dlg)
     {
         for (int j = 1; j < wDialogue_width - 1; j++)
         {
-            wattron(wDialogue, COLOR_PAIR(1));
-            mvwaddch(wDialogue, i, j, ' ');
-            wattroff(wDialogue, COLOR_PAIR(1));
+            wattron(wDialogue, COLOR_PAIR(3));
+            mvwaddch(wDialogue, i, j, 'a');
+            wattroff(wDialogue, COLOR_PAIR(3));
         }
     }
     if (dlg.type == TEXT)
@@ -289,9 +306,9 @@ gameStatus render_playing_screen(char *img, dialogue dlg)
     {
         for (int j = 1; j < wCharName_width - 1; j++)
         {
-            wattron(wCharName, COLOR_PAIR(1));
-            mvwaddch(wCharName, i, j, ' ');
-            wattroff(wCharName, COLOR_PAIR(1));
+            wattron(wCharName, COLOR_PAIR(3));
+            mvwaddch(wCharName, i, j, 'a');
+            wattroff(wCharName, COLOR_PAIR(3));
         }
     }
     mvwaddstr(wCharName, 1, 1, dlg.chr);
@@ -312,5 +329,40 @@ gameStatus end_playing_screen()
     wrefresh(wCharName);
     delwin(wCharName);
     LOG_INFO("Character name window is deleted successfully");
+    return GAME_PLAYING;
+}
+
+gameStatus render_inventory() {
+    LOG_INFO("Starting rendering inventory");
+
+    init_pair(1, COLOR_WHITE, COLOR_BLACK);
+    init_pair(2, COLOR_BLACK, COLOR_WHITE);
+    init_pair(3, COLOR_BLACK, COLOR_BLACK);
+
+    // Render inventory window
+    int wInvs_height, wInvs_width, wInvs_start_x, wInvs_start_y;
+    wInvs_height = INV_HEIGHT;
+    wInvs_width = INV_WIDTH;
+    wInvs_start_x = (COLS - wInvs_width) / 2;
+    wInvs_start_y = (LINES - wInvs_height) / 2;
+    wInvs = newwin(wInvs_height, wInvs_width, wInvs_start_y, wInvs_start_x);
+    box(wInvs, 0, 0);
+    for (int i = 1; i < wInvs_height - 1; i++) {
+        for (int j = 1; j < wInvs_width - 1; j++) {
+            wattron(wInvs, COLOR_PAIR(3));
+            mvwaddch(wInvs, i, j, 'a');
+            wattroff(wInvs, COLOR_PAIR(3));
+        }
+    }
+    wrefresh(wInvs);
+    LOG_INFO("Inventory window is created");
+    return GAME_PLAYING;
+}
+
+gameStatus end_inventory() {
+    wborder(wInvs, ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ');
+    wrefresh(wInvs);
+    delwin(wInvs);
+    LOG_INFO("Inventory window is deleted successfully");
     return GAME_PLAYING;
 }

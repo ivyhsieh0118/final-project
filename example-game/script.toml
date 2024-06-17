@@ -1,209 +1,738 @@
-# Information of the game
-# 1. name (necessary) : name of the game
-# 2. cover (necessary) : cover image of the game
-# 3. version (optional) : version of the game
-# 4. author (optional) : author of the game
-# 5. description (optional) : description of the game
 [information]
-
-# name: string
 name = "Example Game"
-# cover: string
-cover = "/assets/cover.png"
-# version: string
+cover = "cover.bmp"
 version = "1.0.0"
-# author: string
-author = "Lebron James"
-# description: string
+author = "Ivy"
 description = "This is an example game"
 
 
-# Information of the player
-# 1. name (necessary) : name of the player
-# 2. inventory (necessary) : initial inventory of the player
 [player]
-
-# name: string
-name = "Will Smith"
-# inventory: array [ item , ...]
+name = "player"
 inventory = [ "gift", "cake", "candy"]
 
-# All items in the game
-
-# Information of one item
-# 1. name (necessary) : name of the item
-# 2. description (optional) : description of the item
-# 3. value (necessary) : value of increasing favor of the item
-# 4. image (necessary) : image of the item
 [[item]]
-
-# name: string
 name = "gift"
-# description: string
 description = "This is a gift"
-# value: integer
 value = 20
-# image: string
-image = "/assets/images/item/gift.bmp"
+image = "gift.bmp"
 
 [[item]]
 name = "cake"
 description = "This is a cake"
 value = 5
-image = "/assets/images/item/cake.bmp"
+image = "cake.bmp"
 
 [[item]]
 name = "cookies"
 description = "This is a cookies"
 value = 10
-image = "/assets/images/item/cookies.bmp"
-
-# Characters of the game
-[[character]]
-
-# Information of one character
-# 1. name (necessary) : name of the character
-# 2. favor (necessary) : initial favor of the character
-# 3. avatar (necessary) : avatar of the character
-
-# name: string
-name = "Amy"
-# favor: integer
-favor = 50
-# avatar: array [ [ lower bound, upper bound, avatar image ] , ...]
-avatar = [[ 0, 49, "/assets/images/character/amy_1.bmp"], [50, 100, "/assets/images/character/amy_2.bmp"]]
+image = "cookies.bmp"
 
 [[character]]
-name = "Britney"
+name = "Anya"
 favor = 50
-avatar = [[ 0, 49, "/assets/images/character/britney_1.bmp"], [50, 100, "/assets/images/character/britney_2.bmp"]]
+avatar = [[ 0, 49, "/assets/images/character/anya_1.bmp"], [50, 100, "/assets/images/character/anya_2.bmp"]]
 
 [[character]]
-name = "Claire"
+name = "Yor"
 favor = 50
-avatar = [[0, 49, "/assets/images/character/claire_1.bmp"], [50, 100, "/assets/images/character/claire_2.bmp"]]
+avatar = [[ 0, 49, "/assets/images/character/yor_1.bmp"], [50, 100, "/assets/images/character/yor_2.bmp"]]
+
+[[character]]
+name = "Bond"
+favor = 50
+avatar = [[0, 49, "/assets/images/character/bond_1.bmp"], [50, 100, "/assets/images/character/bond_2.bmp"]]
+
+[[character]]
+name = "Loid"
+favor = 50
+avatar = [[0, 49, "/assets/images/character/loid_1.bmp"], [50, 100, "/assets/images/character/loid_2.bmp"]]
+[[character]]
+name = "Badguy"
+favor = 50
+avatar = [[0, 49, "/assets/images/character/badguy.bmp"], [50, 100, "/assets/images/character/badguy.bmp"]]
+[[character]]
+name = "Grandpa"
+favor = 50
+avatar = [[0, 49, "/assets/images/character/grandpa.bmp"], [50, 100, "/assets/images/character/ grandpa .bmp"]]
 
 
-# scenario of the game
 [scenario]
+[[scenario.branch]]
 
-    # branch of the chapter
-    [[scenario.branch]]
+[[scenario.branch.dialogue]]
+scene_image = "anya_home.bmp"
+character = "Anya"
+type = "text"
+text = "我是安妮亞!"
 
-        # dialogue of the scenario ( starts from 0 )
-        # 1. scene_image (necessary) : image of the scene
-        # 2. character (necessary) : character which the dialogue starts with
-        # 3. type (necessary) : type of the dialogue
-        #   3a. text : normal coversation text
-        #   3b. option_by_favor : options for player to choose, select next branch by favor 
-        #   3c. option_by_choice : options for player to choose, select next branch by choosen option
-        # 4. text (necessary) : text of the dialogue
-        [[scenario.branch.dialogue]]
-        scene_image = "classroom.bmp" 
-        character = "player"
-        type = "text"
-        text = "今天真是平凡的一天～1"
+[[scenario.branch.dialogue]]
+scene_image = "anya_home.bmp" 
+character = "Anya"
+type = "text"
+text = "我誕生於某個組織的實驗之下"
 
-        [[scenario.branch.dialogue]]
-        scene_image = "classroom.bmp" 
-        character = "player"
-        type = "text"
-        text = "今天真是平凡的一天～2"
+[[scenario.branch.dialogue]]
+scene_image = "anya_home.bmp"
+character = "Anya" 
+type = "text"
+text = "因此，我其實是一個會讀心術的超能力者喔!"
 
-        [[scenario.branch.dialogue]]
-        scene_image = "classroom.bmp" 
-        character = "player"
-        type = "text"
-        text = "今天真是平凡的一天～3"
+[[scenario.branch.dialogue]]
+scene_image = "loid_home.bmp" 
+character = "Loid"
+type = "text"
+text = "我是洛伊德佛傑，安妮亞的爸爸"
 
-        [[scenario.branch.dialogue]]
-        scene_image = "classroom.bmp" 
-        character = "player"
-        type = "text"
-        text = "今天真是平凡的一天～4"
+[[scenario.branch.dialogue]]
+scene_image = "loid_home.bmp" 
+character = "Loid"
+type = "text"
+text = "表面上，我是一名精神科醫生"
 
-        [[scenario.branch.dialogue]]
-        scene_image = "classroom.bmp" 
-        character = "Amy"
-        type = "text"
-        text = "對啊對啊！1"
+[[scenario.branch.dialogue]]
+scene_image = "loid_home.bmp" 
+character = "Loid"
+type = "text"
+text = "實際上，我是一名間諜 代號是黃昏"
 
-        [[scenario.branch.dialogue]]
-        scene_image = "classroom.bmp" 
-        character = "Amy"
-        type = "text"
-        text = "對啊對啊！2"   
+[[scenario.branch.dialogue]]
+scene_image = "yor_home.bmp" 
+character = "Yor"
+type = "text"
+text = "我是約兒，安妮亞的媽媽"
 
-        [[scenario.branch.dialogue]]
-        scene_image = "classroom.bmp" 
-        character = "player"
-        # type : option_by_favor option_by_choice
-        type = "option_by_choice"
-        
-            [[scenario.branch.dialogue.option]]
-            text = "哇！你是從哪裡冒出來的啊！"
-            next_branch = 1
+[[scenario.branch.dialogue]]
+scene_image = "yor_home.bmp" 
+character = "Yor"
+type = "text"
+text = "表面上，我是一個公務員"
 
-            [[scenario.branch.dialogue.option]]
-            text = "我只是在自言自語不用回答啦！"
-            next_branch = 2
+[[scenario.branch.dialogue]]
+scene_image = "yor_home.bmp"
+character = "Yor" 
+type = "text"
+text = "實際上，我是一個技術高超的殺手！代號是睡美人"
 
-    [[scenario.branch]]
-        
-        [[scenario.branch.dialogue]]
-        scene_image = "classroom.bmp" 
-        character = "Amy"
-        type = "text"
-        text = "從一開始就在啦"
+[[scenario.branch.dialogue]]
+scene_image = "anya_home.bmp" 
+character = "Anya"
+type = "text"
+text = "雖然媽媽很溫柔，可惜料理非常難吃呢"
 
-        [[scenario.branch.dialogue]]
-        scene_image = "classroom.bmp" 
+[[scenario.branch.dialogue]]
+scene_image = "yor_home.bmp" 
+character = "Yor"
+type = "text"
+text = "安妮亞…你這樣太傷我的心了"
+
+[[scenario.branch.dialogue]]
+scene_image = "anya_home.bmp" 
+character = "Anya"
+type = "text"
+text = "總而言之，為了完成機密任務 爸爸領養了我，娶了媽媽"
+
+[[scenario.branch.dialogue]]
+scene_image = "anya_home.bmp" 
+character = "Anya"
+type = "text"
+text = "因為我救了一個溺水的小男孩，所以拿到了伊甸學院的第一顆星星"
+
+[[scenario.branch.dialogue]]
+scene_image = "anya_home.bmp" 
+character = "Anya"
+type = "text"
+text = "我和爸爸說想要養一隻可愛的狗狗當作獎勵"
+[[scenario.branch.dialogue]]
+scene_image = "anya_home.bmp" 
+character = "Anya"
+type = "text"
+text = "這一天 爸爸媽媽帶著我去寵物店 我終於要有屬於自己的可愛狗狗啦！"
+
+[[scenario.branch.dialogue]]
+scene_image = "loid_dog.bmp" 
+character = "Loid"
+type = "text"
+text = "既然要養狗 就要養有防衛功能的警犬"
+[[scenario.branch.dialogue]]
+scene_image = "loid_dog.bmp" 
+character = "Loid"
+type = "text"
+text = "安妮亞 這些狗都很聰明又能顧家 你從這裡挑一隻回家吧"
+[[scenario.branch.dialogue]]
+scene_image = "anya_dog.bmp" 
+character = "Anya"
+type = "text"
+text = "可是我想要的是可愛的小狗啊！！"
+
+[[scenario.branch.dialogue]]
+scene_image = "yor_dog.bmp" 
+character = "Yor"
+type = "text"
+text = "看來安妮亞不太喜歡阿...老闆說旁邊正好有一個領養會 不然我們一起去看看"
+[[scenario.branch.dialogue]]
+scene_image = "loid_dog.bmp" 
+character = "Loid"
+type = "text"
+text = "可以呀 但是我臨時有事 你們先過去吧"
+[[scenario.branch.dialogue]]
+scene_image = "anya_dog.bmp" 
+character = "Anya"
+type = "text"
+text = "看來爸爸接到了一個緊急任務呢"
+
+[[scenario.branch.dialogue]]
+scene_image = "anya_animal.bmp" 
+character = "Anya"
+type = "text"
+text = "這裡有好多可愛的狗狗貓貓！還有兔子 waku waku!"
+[[scenario.branch.dialogue]]
+scene_image = "yor_animal.bmp" 
+character = "Yor"
+type = "text"
+text = "啊!!臘腸狗腿好短!!好可愛啊"
+
+[[scenario.branch.dialogue]]
+scene_image = "anya_animal.bmp" 
+character = "Anya"
+type = "text"
+text = "腿短也可愛嗎?那安妮亞也可愛嗎?"
+[[scenario.branch.dialogue]]
+        scene_image = "animal.bmp" 
         character = "player"
         type = "option_by_favor"
-        next_branch = [ [0, 50, 2], [51, 100, 3] ]      
+object = "Anya"
+        next_branch = [ [0, 50, 1], [51, 100, 1] ]            
 
             [[scenario.branch.dialogue.option]]
-            text = "我怎麼沒有發現"
-            object = "Amy"
+            text = "臘腸狗好像比較可愛耶"
             value = -5
 
             [[scenario.branch.dialogue.option]]
-            text = "那你早點說嘛"
-            object = "Amy"
+            text = "安妮亞當然更可愛!"
             value = 5
 
-    [[scenario.branch]]
+[[scenario.branch]]
 
-        [[scenario.branch.dialogue]]
-        scene_image = "classroom.bmp" 
-        character = "Amy"
-        type = "text"
-        text = "我以為你是在跟我講話啊"
+[[scenario.branch.dialogue]]
+scene_image = "bond_animal.bmp" 
+character = "Bond"
+type = "text"
+text = "…"
 
-    [[scenario.branch]]
+[[scenario.branch.dialogue]]
+scene_image = "anya_animal.bmp" 
+character = "Anya"
+type = "text"
+text = "哇!窗外有一隻好大的白色狗狗"
 
-        [[scenario.branch.dialogue]]
-        scene_image = "classroom.bmp" 
-        character = "Amy"
-        type = "text"
-        text = "你都沒有在注意人家..."
+[[scenario.branch.dialogue]]
+scene_image = "anya_family.bmp" 
+character = "Anya"
+type = "text"
+text = "這是狗狗腦海裡的畫面嗎?"
+[[scenario.branch.dialogue]]
+scene_image = "anya_family.bmp" 
+character = "Anya"
+type = "text"
+text = "狗狗怎麼能看到我們家！難道…？"
 
-    [[scenario.branch]]
+[[scenario.branch.dialogue]]
+scene_image = "family.bmp" 
+character = "player"
+type = "option_by_choice"
+            [[scenario.branch.dialogue.option]]
+            text = "不管了，先繼續挑想要的狗狗吧"
+            next_branch = 2
 
-        [[scenario.branch.dialogue]]
-        scene_image = "classroom.bmp" 
-        character = "Amy"
-        type = "text"
-        text = "我以為你是在跟我講話啊1"
+            [[scenario.branch.dialogue.option]]
+            text = "不行 我得去找他!"
+            next_branch = 3
 
-        [[scenario.branch.dialogue]]
-        scene_image = "classroom.bmp" 
-        character = "Amy"
-        type = "text"
-        text = "我以為你是在跟我講話啊2"
+[[scenario.branch]]
 
-        [[scenario.branch.dialogue]]
-        scene_image = "classroom.bmp" 
-        character = "Amy"
-        type = "text"
-        text = "我以為你是在跟我講話啊3"
+[[scenario.branch.dialogue]]
+scene_image = "yor_animal.bmp" 
+character = "Yor"
+type = "text"
+text = "安妮亞 有看到喜歡的狗狗嗎"
+[[scenario.branch.dialogue]]
+scene_image = "anya_animal.bmp" 
+character = "Anya"
+type = "text"
+text = "嗯…還是麻麻 我們可以養那種很大很大的狗狗嗎!"
+[[scenario.branch.dialogue]]
+scene_image = "yor_animal.bmp" 
+character = "Yor"
+type = "text"
+text = "可以是可以…但是這裡也沒有你說的大狗阿"
+[[scenario.branch.dialogue]]
+scene_image = "anya_animal.bmp" 
+character = "Anya"
+type = "text"
+text = "安妮亞要養窗外這隻大狗狗!"
+
+[[scenario.branch.dialogue]]
+scene_image = "anya_animal.bmp" 
+character = "Anya"
+type = "text"
+text = "安妮亞要養窗外這隻大狗狗!"
+
+[[scenario.branch.dialogue]]
+scene_image = "yor_animal.bmp" 
+character = "Yor"
+type = "text"
+text = "安妮亞這樣不行喔 這是別人家的狗狗"
+
+[[scenario.branch.dialogue]]
+scene_image = "animal.bmp" 
+character = "player"
+type = "option_by_choice"
+            [[scenario.branch.dialogue.option]]
+            text = "可是…我就是想知道為什麼狗狗看的見我們家"
+            next_branch = 3
+
+            [[scenario.branch.dialogue.option]]
+            text = "算了 我等等自己溜出去找狗狗"
+            next_branch = 3
+
+[[scenario.branch]]
+
+[[scenario.branch.dialogue]]
+scene_image = "anya_badpeople.bmp" 
+character = "Anya"
+type = "text"
+text = "呼…終於跟上狗狗了 但是…這是哪裡??"
+
+[[scenario.branch.dialogue]]
+scene_image = "badguy_badpeople.bmp" 
+character = "Badguy"
+type = "text"
+text = "讓我們用狗體炸彈展開恐怖攻擊 打破東西兩國的和平局面 發起戰爭吧！"
+[[scenario.branch.dialogue]]
+scene_image = "anya_badpeople.bmp" 
+character = "Anya"
+type = "text"
+text = "炸彈？！戰爭？！"
+
+[[scenario.branch.dialogue]]
+scene_image = "badguy_badpeople.bmp" 
+character = "Badguy"
+type = "text"
+text = "是誰？我們的臉都被看到了 趕緊殺了她"
+
+[[scenario.branch.dialogue]]
+scene_image = "bond_badpeople.bmp" 
+character = "Bond"
+type = "text"
+text = "..."
+[[scenario.branch.dialogue]]
+scene_image = "anya_badpeople.bmp" 
+character = "Anya"
+type = "text"
+text = "電話？逃跑？"
+[[scenario.branch.dialogue]]
+scene_image = "anya_badpeople.bmp"
+character = "Anya" 
+type = "text"
+text = "狗狗！你怎麼知道電話會響！難道你能預測未來！"
+
+[[scenario.branch.dialogue]]
+scene_image = "anya_badpeople.bmp" 
+character = "Anya"
+type = "text"
+text = "你跟安尼亞一樣是超能力者嗎！"
+[[scenario.branch.dialogue]]
+scene_image = "bond_badpeople.bmp" 
+character = "Bond"
+type = "text"
+text = "汪汪!"
+[[scenario.branch.dialogue]]
+scene_image = "yor_street.bmp" 
+character = "Yor"
+type = "text"
+text = "安尼亞！我終於找到你了 你不可以再亂跑了喔"
+[[scenario.branch.dialogue]]
+scene_image = "anya_loiddie.bmp" 
+character = "Anya"
+type = "text"
+text = "狗狗…你的意思是…爸爸…會死掉…？"
+
+[[scenario.branch.dialogue]]
+scene_image = "anya_loiddie.bmp"
+character = "Anya" 
+type = "text"
+text = "不行 我必須改變未來!!"
+
+[[scenario.branch.dialogue]]
+scene_image = "anya_street.bmp" 
+character = "Anya"
+type = "text"
+text = "怎麼辦??我要跟媽媽說我跟狗狗都是超能力者 預知未來爸爸會死掉嗎?"
+
+[[scenario.branch.dialogue]]
+scene_image = "street.bmp" 
+character = "player"
+type = "option_by_choice"
+            [[scenario.branch.dialogue.option]]
+            text = "告訴媽媽事實"
+            next_branch = 4
+
+            [[scenario.branch.dialogue.option]]
+            text = "偷偷去救爸爸"
+            next_branch = 5
+
+[[scenario.branch]]
+
+[[scenario.branch.dialogue]]
+scene_image = "anya_street.bmp" 
+character = "Anya"
+type = "text"
+text = "媽媽 雖然這聽起來很荒謬 但你可以答應我聽完不要拋棄我嗎"
+
+[[scenario.branch.dialogue]]
+scene_image = "yor_street.bmp" 
+character = "Yor"
+type = "text"
+text = "我怎麼可能拋棄你! 你說吧!"
+[[scenario.branch.dialogue]]
+scene_image = "anya_street.bmp" 
+character = "Anya"
+type = "text"
+text = "其實我會那麼堅持要去找狗狗是因為我看到狗狗腦海裡出現了我們家"
+[[scenario.branch.dialogue]]
+scene_image = "yor_street.bmp" 
+character = "Yor"
+type = "text"
+text = "什麼意思?你為什麼能知道狗狗在想什麼? 狗狗又怎麼看見我們家?"
+[[scenario.branch.dialogue]]
+scene_image = "anya_street.bmp" 
+character = "Anya"
+type = "text"
+text = "因為…因為我其實有讀心術 而狗狗跟我一樣是超能力者 他會預測未來"
+[[scenario.branch.dialogue]]
+scene_image = "anya_street.bmp" 
+character = "Anya"
+type = "text"
+text = "我剛剛看到鐘聲響的時候 爸爸會被炸死"
+[[scenario.branch.dialogue]]
+scene_image = "anya_street.bmp" 
+character = "Anya"
+type = "text"
+text = "所以媽媽!我們先去救爸爸 其他的晚點再說吧"
+[[scenario.branch.dialogue]]
+scene_image = "yor_street.bmp" 
+character = "Yor"
+type = "text"
+text = "啊啊啊…雖然搞不太清楚狀況 但是"
+[[scenario.branch.dialogue]]
+scene_image = "street.bmp" 
+character = "player"
+type = "option_by_choice"
+            [[scenario.branch.dialogue.option]]
+            text = "我們還是趕快去找爸爸吧"
+            next_branch =5
+
+            [[scenario.branch.dialogue.option]]
+            text = "時間看起來不多了 救人要緊"
+            next_branch = 5
+
+[[scenario.branch]]
+[[scenario.branch.dialogue]]
+scene_image = "anya_clock.bmp" 
+character = "Anya"
+type = "text"
+text = "終於到了! 我想想 五點鐘響時會爆炸 現在是…"
+[[scenario.branch.dialogue]]
+scene_image = "anya_clock.bmp" 
+character = "Anya"
+type = "text"
+text = "安尼亞不會看時鐘！時針 分針 哪個是哪個??"
+[[scenario.branch.dialogue]]
+scene_image = "anya_clock.bmp" 
+character = "Anya"
+type = "text"
+text = "看起來應該還有半個小時才會爆炸吧 還是要問問看路人?"
+[[scenario.branch.dialogue]]
+scene_image = "clock.bmp" 
+character = "player"
+type = "option_by_choice"
+            [[scenario.branch.dialogue.option]]
+            text = "相信自己"
+            next_branch =7
+
+            [[scenario.branch.dialogue.option]]
+            text = "問問路人"
+            next_branch = 6
+[[scenario.branch]]
+[[scenario.branch.dialogue]]
+scene_image = "anya_clock.bmp" 
+character = "Anya"
+type = "text"
+text = "不好意思!請問這個鐘什麼時候會響呢"
+[[scenario.branch.dialogue]]
+scene_image = "grandpa_clock.bmp" 
+character = "Grandpa"
+type = "text"
+text = "我看看喔...這個鐘一個小時響一次 現在是四點半，所以再過半小時就敲鐘囉"
+[[scenario.branch.dialogue]]
+scene_image = "anya_clock.bmp" 
+character = "Anya"
+type = "text"
+text = "安妮亞果然還是很聰明的 只剩三十分鐘！我們要儘快！"
+[[scenario.branch.dialogue]]
+scene_image = "bond_clock.bmp" 
+character = "Bond"
+type = "text"
+text = "汪汪汪!"
+
+[[scenario.branch]]
+[[scenario.branch.dialogue]]
+scene_image = "anya_bomb.bmp" 
+character = "Anya"
+type = "text"
+text = "發現炸彈! 我想想...只要像卡通裡一樣剪掉紅色或藍色的線就行了對吧"
+
+[[scenario.branch.dialogue]]
+scene_image = "anya_bomb.bmp" 
+character = "Anya"
+type = "text"
+text = "…怎麼跟卡通演得不一樣 全部都是黑色的線啊！！不對 我連剪刀都沒有"
+[[scenario.branch.dialogue]]
+scene_image = "anya_bomb.bmp" 
+character = "Anya"
+type = "text"
+text = "怎麼辦...要直接跟爸爸說這裡有炸彈不能進來嗎"
+
+[[scenario.branch.dialogue]]
+scene_image = "anya_bomb.bmp" 
+character = "Anya"
+type = "text"
+text = "但是這樣超能力的事就會被發現了...我會不會又因為這樣而被丟掉呢"
+[[scenario.branch.dialogue]]
+scene_image = "bomb.bmp" 
+character = "player"
+type = "option_by_choice"
+            [[scenario.branch.dialogue.option]]
+            text = "直接告訴父親吧"
+            next_branch =8
+
+            [[scenario.branch.dialogue.option]]
+            text = "不行 我再想想辦法"
+            next_branch = 9
+
+[[scenario.branch]]
+[[scenario.branch.dialogue]]
+scene_image = "loid_door.bmp" 
+character = "Loid"
+type = "text"
+text = "安妮亞 你怎麼會出現在這裡?"
+[[scenario.branch.dialogue]]
+scene_image = "anya_door.bmp" 
+character = "Anya"
+type = "text"
+text = "爸爸!不能進去!裡面有炸彈!"
+[[scenario.branch.dialogue]]
+scene_image = "loid_door.bmp" 
+character = "Loid"
+type = "text"
+text = "你怎麼知道?"
+[[scenario.branch.dialogue]]
+scene_image = "anya_door.bmp" 
+character = "Anya"
+type = "text"
+text = "其實...我和狗狗都有超能力"
+[[scenario.branch.dialogue]]
+scene_image = "anya_door.bmp" 
+character = "Anya"
+type = "text"
+text = "聽起來很難以致信 但我會讀心術 狗狗會預知未來"
+[[scenario.branch.dialogue]]
+scene_image = "anya_door.bmp" 
+character = "Anya"
+type = "text"
+text = "我看到狗狗腦海裡爸爸被炸彈炸死的畫面"
+[[scenario.branch.dialogue]]
+scene_image = "anya_door.bmp" 
+character = "Anya"
+type = "text"
+text = "原本不想直接告訴爸爸的...但安妮亞不會拆炸彈 也想不到其他方法了"
+[[scenario.branch.dialogue]]
+scene_image = "anya_door.bmp" 
+character = "Anya"
+type = "text"
+text = "你也覺得我是怪物嗎...會因此拋棄我嗎"
+[[scenario.branch.dialogue]]
+scene_image = "loid_door.bmp" 
+character = "Loid"
+type = "text"
+text = "傻瓜 你可是救了我一命呀 我怎麼可能拋棄你呢"
+[[scenario.branch.dialogue]]
+scene_image = "loid_door.bmp" 
+character = "Loid"
+type = "text"
+text = "而且你會讀心術，一定也知道我是間諜了吧 間諜配上超能力者 簡直就是最佳搭檔"
+[[scenario.branch.dialogue]]
+scene_image = "loid_door.bmp" 
+character = "Loid"
+type = "text"
+text = "安妮亞 你願意和我一起出任務嗎"
+[[scenario.branch.dialogue]]
+scene_image = "anya_door.bmp" 
+character = "Anya"
+type = "text"
+text = "爸爸...嗚嗚...說好了不可以丟下我一個人喔"
+[[scenario.branch.dialogue]]
+scene_image = "anya_door.bmp" 
+character = "Anya"
+type = "text"
+text = "還有還有!安妮亞想要養彭德!"
+
+[[scenario.branch.dialogue]]
+        scene_image = "door.bmp" 
+        character = "player"
+        type = "option_by_favor"
+object = "Anya"
+        next_branch = [ [0, 50, 10], [51, 100, 11] ]            
+
+            [[scenario.branch.dialogue.option]]
+            text = "但他畢竟是恐怖分子訓練的狗 這樣好嗎"
+            value = -5
+
+            [[scenario.branch.dialogue.option]]
+            text = "好好好~都聽你的"
+          value = 5
+[[scenario.branch]]
+[[scenario.branch.dialogue]]
+scene_image = "anya_bomb.bmp"
+character = "Anya" 
+type = "text"
+text = "那裡有一罐番茄醬!我可以在門上做記號 爸爸那麼聰明一定看得懂的"
+[[scenario.branch.dialogue]]
+scene_image = "loid_door2.bmp" 
+character = "Loid"
+type = "text"
+text = "等等 先別開門 門上的痕跡是什麼?是血跡嗎"
+[[scenario.branch.dialogue]]
+scene_image = "loid_door2.bmp" 
+character = "Loid"
+type = "text"
+text = "聞起來像是番茄醬的味道"
+
+[[scenario.branch.dialogue]]
+scene_image = "door2.bmp" 
+character = "player"
+type = "option_by_choice"
+            [[scenario.branch.dialogue.option]]
+            text = "動作快!我們已經撲空一次了 不能再失敗了"
+            next_branch =12
+
+            [[scenario.branch.dialogue.option]]
+            text = "我有不好的預感..."
+          next_branch = 13
+
+
+[[scenario.branch]]
+[[scenario.branch.dialogue]]
+scene_image = "anya_street.bmp" 
+character = "Anya"
+type = "text"
+text = "好吧…狗狗 看來我們沒有緣分 希望我們之後還能遇見!"
+[[scenario.branch]]
+[[scenario.branch.dialogue]]
+scene_image = "anya_street.bmp" 
+character = "Anya"
+type = "text"
+text = "耶!!狗狗!從今以後我們就是一家人了"
+[[scenario.branch]]
+[[scenario.branch.dialogue]]
+scene_image = "anya_explode.bmp" 
+character = "Anya"
+type = "text"
+text = "怎麼會…爸爸沒有看懂我的暗號嗎 嗚嗚嗚"
+[[scenario.branch.dialogue]]
+scene_image = "loid_explode.bmp" 
+character = "Loid"
+type = "text"
+text = "傻瓜 爸爸看起來很笨嗎"
+[[scenario.branch.dialogue]]
+scene_image = "anya_explode.bmp" 
+character = "Anya"
+type = "text"
+text = "爸爸!你還活著!"
+[[scenario.branch.dialogue]]
+scene_image = "loid_explode.bmp" 
+character = "Loid"
+type = "text"
+text = "雖然沒看懂你畫的是什麼 但是身為間諜 當然不會掉以輕心"
+[[scenario.branch.dialogue]]
+scene_image = "loid_explode.bmp" 
+type = "text"
+text = "那個炸彈是定時炸彈 因為來不及拆解 只好先逃離現場 好在沒有人傷亡"
+[[scenario.branch.dialogue]]
+scene_image = "loid_explode.bmp" 
+character = "Loid"
+type = "text"
+text = "話說…你為什麼知道炸彈的事"
+[[scenario.branch.dialogue]]
+scene_image = "anya_explode.bmp" 
+character = "Anya"
+type = "text"
+text = "這個嘛…之後再跟爸爸解釋 我們趕快回去找媽媽吧 剛剛偷跑出來媽媽一定很著急"
+[[scenario.branch.dialogue]]
+scene_image = "anya_street.bmp" 
+character = "Anya"
+type = "text"
+text = "還有還有!安妮亞想要養彭德!"
+
+[[scenario.branch.dialogue]]
+        scene_image = "street.bmp" 
+        character = "player"
+        type = "option_by_favor"
+object = "Anya"
+        next_branch = [ [0, 50, 10], [51, 100, 11] ]            
+
+            [[scenario.branch.dialogue.option]]
+            text = "但他畢竟是恐怖分子訓練的狗 這樣好嗎"
+            value = -5
+
+            [[scenario.branch.dialogue.option]]
+            text = "好好好~都聽你的"
+          value = 5
+[[scenario.branch]]
+[[scenario.branch.dialogue]]
+scene_image = "loid_door2.bmp" 
+character = "Loid"
+type = "text"
+text = "這應該是某種訊息 不可以掉以輕心"
+[[scenario.branch.dialogue]]
+scene_image = "loid_door2.bmp" 
+character = "Loid"
+type = "text"
+text = "果然 門上綁了炸彈 一旦開門就會爆炸 不過...這究竟是誰留下的暗號呢"
+
+[[scenario.branch.dialogue]]
+scene_image = "anya_clock.bmp" 
+character = "Anya"
+type = "text"
+text = "太好了!!鐘聲響起的時候沒有爆炸 爸爸得救了! 安妮亞跟狗狗救了未來!"
+[[scenario.branch.dialogue]]
+scene_image = "anya_street.bmp" 
+character = "Anya"
+type = "text"
+text = "爸爸爸爸! 安妮亞想要養彭德!"
+
+[[scenario.branch.dialogue]]
+        scene_image = "street.bmp" 
+        character = "player"
+        type = "option_by_favor"
+object = "Anya"
+        next_branch = [ [0, 50, 10], [51, 100, 11] ]            
+
+            [[scenario.branch.dialogue.option]]
+            text = "但他畢竟是恐怖分子訓練的狗 這樣好嗎"
+            value = -5
+
+            [[scenario.branch.dialogue.option]]
+            text = "好好好~都聽你的"
+          value = 5

@@ -2,6 +2,9 @@
 #include "script_loader.h"
 #include "render.h"
 
+gameStatus status;
+colorMode mode;
+
 int nowMainMenuOpt = 0;
 int nowDlgOpt = 0;
 char *dir;
@@ -14,6 +17,7 @@ int dlgNum = -1;
 int chrNum = -1;
 
 character chr[10];
+player plr;
 
 int main(int argc, char **argv)
 {
@@ -52,6 +56,8 @@ int main(int argc, char **argv)
 
     status = GAME_INITIALIZING;
     int ch = -1;
+    char coverImg[100];
+    int invOp = 0;
 
     // Game Loop
     while (status != GAME_EXITING)
@@ -61,6 +67,7 @@ int main(int argc, char **argv)
             // Loading ncurses and main menu resources
             status = init_curses();
             status = init_script_loader(dir);
+            status = load_information(coverImg);
             if (status == GAME_INITIALIZING)
             {
                 status = GAME_MAIN_MENU;
@@ -84,7 +91,9 @@ int main(int argc, char **argv)
                 else if (ch == KEY_UP)
                 {
                     nowMainMenuOpt = (nowMainMenuOpt + MAIN_MENU_OPT_NUM - 1) % MAIN_MENU_OPT_NUM;
-                    status = render_main_menu("img");
+                    char imgLink[300];
+                    sprintf(imgLink, "%s/%s", dir, "img");
+                    status = render_main_menu(imgLink);
                     ch = getch();
                 }
                 else if (ch == KEY_DOWN)
@@ -99,7 +108,7 @@ int main(int argc, char **argv)
                     if (nowMainMenuOpt == 0)
                     {
                         status = end_main_menu();
-                        // status = load_player();
+                        status = load_player();
                         status = load_characters();
                         status = load_scenario();
                         status = load_branch(nowBrcNum);
@@ -120,7 +129,15 @@ int main(int argc, char **argv)
         {
             dialogue nowDlg;
             status = load_dialogue(nowDlgNum, &nowDlg);
-            status = render_playing_screen("img", nowDlg);
+            int nowChr = -1;
+            for (int i = 0; i < chrNum; i++) {
+                if (!strcmp(nowDlg.chr, chr[i].name)) {
+                    nowChr = i;
+                }
+            }
+            char scene[500];
+            sprintf(scene, "%s/%s", dir, nowDlg.img);
+            status = render_playing_screen(scene, nowDlg);
             ch = getch();
             if (ch == 'q') {
                 status = end_playing_screen();

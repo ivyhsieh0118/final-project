@@ -6,7 +6,6 @@
 #include <string.h>
 #include <unistd.h>
 #include <curses.h>
-#include <sixel.h>
 #include <locale.h>
 #include <dirent.h>
 #include <errno.h>
@@ -92,8 +91,20 @@ typedef struct _character {
     chrAvatar avatar[4];
 } character;
 
-gameStatus status;
-colorMode mode;
+typedef struct _item {
+    char name[100];
+    char desc[300];
+    int val;
+    char img[300];
+} item;
+typedef struct _player {
+    char name[100];
+    int nInv;
+    item inv[10];
+} player;
+
+extern gameStatus status;
+extern colorMode mode;
 extern int nowMainMenuOpt;
 extern int cptNum, brcNum, dlgNum;
 
